@@ -8,11 +8,12 @@
     tools:context=".LoginPage">
 
     <EditText
+        android:id="@+id/loginemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/loginemail"
-        android:hint="Enter Email">
-    </EditText>
+        android:ems="10"
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:layout_width="match_parent"

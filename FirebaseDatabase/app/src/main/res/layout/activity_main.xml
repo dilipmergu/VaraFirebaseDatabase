@@ -12,12 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/name"
+        android:gravity="center"
         android:hint="Enter Name">
     </EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/email"
+        android:gravity="center"
         android:hint="Enter Email">
     </EditText>
 
@@ -26,14 +28,27 @@
         android:layout_height="wrap_content"
         android:inputType="numberPassword"
         android:id="@+id/pass"
+        android:gravity="center"
         android:hint="Enter Password">
     </EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Phone"
+        android:gravity="center"
         android:id="@+id/phone">
     </EditText>
+
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/registration_spinner"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+    </Spinner>
+
     <Button
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"

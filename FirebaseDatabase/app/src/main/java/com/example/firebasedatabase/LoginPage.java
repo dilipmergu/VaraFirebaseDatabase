@@ -18,28 +18,26 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginPage extends AppCompatActivity {
-    EditText username,password;
+    EditText email,password;
     Button loginbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
-        username=findViewById(R.id.loginemail);
+        email=findViewById(R.id.loginemail);
         password=findViewById(R.id.loginpass);
         loginbtn=findViewById(R.id.loginbtn);
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 isUser();
-
             }
         });
     }
 
     private void isUser() {
-        final String userenteredname=username.getEditableText().toString();
+        final String userenteredname=email.getEditableText().toString();
         final String userenteredpass=password.getEditableText().toString();
 
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Registration");
@@ -61,7 +59,7 @@ public class LoginPage extends AppCompatActivity {
                     }
                 }
                 else {
-                    username.setError("No Such User");
+                    email.setError("No Such User");
                 }
             }
 
@@ -71,4 +69,5 @@ public class LoginPage extends AppCompatActivity {
             }
         });
     }
+
 }
