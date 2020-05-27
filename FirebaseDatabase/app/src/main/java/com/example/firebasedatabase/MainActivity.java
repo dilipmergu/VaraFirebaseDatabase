@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase rootnode;
     DatabaseReference reference;
     Spinner spinner;
+    int selpos;
+    String textselect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +45,16 @@ public class MainActivity extends AppCompatActivity {
         Registerationpurpose.add(0,"Select Purpose");
         Registerationpurpose.add(1,"Register As Nanny");
         Registerationpurpose.add(2,"Register For Nanny");
-        ArrayAdapter<String>arrayAdapter=new ArrayAdapter<String>
+        ArrayAdapter<String>arrayAdapter=new ArrayAdapter<>
                 (this,android.R.layout.simple_spinner_item,Registerationpurpose);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String textselect= parent.getItemAtPosition(position).toString();
+                textselect= parent.getItemAtPosition(position).toString();
+                selpos = position;
+                System.out.println("printing..."+selpos);
                 Toast.makeText(MainActivity.this,"Selected" + textselect,Toast.LENGTH_SHORT).show();
             }
 
@@ -57,20 +62,24 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
         });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rootnode=FirebaseDatabase.getInstance();
-                reference=rootnode.getReference("Registration");
-                String testemail=signupemail.getText().toString();
-                String username=signupname.getText().toString();
-                String testphone=signupphone.getText().toString();
-                String testpass=signuppass.getText().toString();
-                JavaHelperClass javaHelperClass=new JavaHelperClass(username,testemail,testphone,testpass);
-                reference.child(username).setValue(javaHelperClass);
-                Intent intent=new Intent(getApplicationContext(),VerifyPhoneNumber.class);
-                intent.putExtra("phonenumber",testphone);
+                //intent.putExtra("phonenumber",testphone);
+
+                if (selpos==1){
+
+                    RigisterasNanny();
+                }
+                else if (selpos==2) {
+
+                    Rigisterfornanny();
+                }
+                Intent intent=new Intent(getApplicationContext(),LoginPage.class);
+
                 startActivity(intent);
             }
         });
@@ -82,7 +91,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+    }
+    private void RigisterasNanny() {
+        rootnode=FirebaseDatabase.getInstance();
+        reference=rootnode.getReference("Registr As Nanny");
+        String testemail=signupemail.getText().toString();
+        String username=signupname.getText().toString();
+        String testphone=signupphone.getText().toString();
+        String testpass=signuppass.getText().toString();
+        JavaHelperClass javaHelperClass=new JavaHelperClass(username,testemail,testphone,testpass);
+        reference.child(username).setValue(javaHelperClass);
+    }
 
-
+    private void Rigisterfornanny() {
+        rootnode=FirebaseDatabase.getInstance();
+        reference=rootnode.getReference("Registr For Nanny");
+        String testemail=signupemail.getText().toString();
+        String username=signupname.getText().toString();
+        String testphone=signupphone.getText().toString();
+        String testpass=signuppass.getText().toString();
+        JavaHelperClass javaHelperClass=new JavaHelperClass(username,testemail,testphone,testpass);
+        reference.child(username).setValue(javaHelperClass);
     }
 }
