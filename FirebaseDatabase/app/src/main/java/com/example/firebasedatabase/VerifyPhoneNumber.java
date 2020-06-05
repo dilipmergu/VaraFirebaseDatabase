@@ -39,7 +39,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbar);
 
         String usergivenphonenumber = getIntent().getStringExtra("phonenumber");
-        Log.i("onCreate method","called");
+        Log.i("onCreate method","calling");
         SendVerificationCodetoUser(usergivenphonenumber);
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
