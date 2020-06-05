@@ -40,6 +40,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
 
         String usergivenphonenumber = getIntent().getStringExtra("phonenumber");
         Log.i("onCreate method","calling");
+	Log.i("onCreate method","Check again");
         SendVerificationCodetoUser(usergivenphonenumber);
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +49,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
                 String codeverify= enterotp.getText().toString();
 
                 if (codeverify.isEmpty()&& codeverify.length()<6){
-                    enterotp.setError("Incorrect OTP");
+                    enterotp.setError("Please enter correct OTP");
                 }
                 progressBar.setVisibility(View.VISIBLE);
                 VerifyCode(codeverify);
